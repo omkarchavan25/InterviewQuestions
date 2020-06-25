@@ -1,9 +1,12 @@
 package com.example.myapplication.Activity;
 
 import android.content.Intent;
+import android.util.Log;
 import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import com.amplifyframework.AmplifyException;
+import com.amplifyframework.core.Amplify;
 import com.example.myapplication.R;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
@@ -13,6 +16,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        try {
+            Amplify.configure(getApplicationContext());
+
+            Log.i("MyAmplifyApp", "Initialized Amplify");
+        } catch (AmplifyException error) {
+            Log.e("MyAmplifyApp", "Could not initialize Amplify", error);
+        }
         setContentView(R.layout.activity_main);
         findViewById();
     }
